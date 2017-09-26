@@ -110,6 +110,16 @@ def load_model():
 
     return model
 
+def save_kernels1(model):
+    l = model.get_layer('conv2d_1')
+    k = extract_kernels(l)
+    save(8, 4, 3, 3, 1, k, 'k0.png')
+
+def save_kernels2(model):
+    l = model.get_layer('conv2d_2')
+    k = extract_kernels(l)
+    save(8, 8, 3, 3, 1, k, 'k1.png')
+
 def main():
     model = load_model()
     print(model.summary())
