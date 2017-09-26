@@ -18,7 +18,7 @@ img_height = 128
 
 # the name of the layer we want to visualize
 # (see model definition at keras/applications/vgg16.py)
-layer_name = 'block5_conv1'
+layer_name = 'block1_conv2'
 
 # util function to convert a tensor into a valid image
 
@@ -59,7 +59,7 @@ def normalize(x):
 
 
 kept_filters = []
-for filter_index in range(0, 200):
+for filter_index in range(0, 64):
     # we only scan through the first 200 filters,
     # but there are actually 512 of them
     print('Processing filter %d' % filter_index)
@@ -103,9 +103,12 @@ for filter_index in range(0, 200):
             break
 
     # decode the resulting input image
-    if loss_value > 0:
-        img = deprocess_image(input_img_data[0])
-        kept_filters.append((img, loss_value))
+    # if loss_value > 0:
+    #    img = deprocess_image(input_img_data[0])
+    #    kept_filters.append((img, loss_value))
+
+    img = deprocess_image(input_img_data[0])
+    kept_filters.append((img, loss_value))
     end_time = time.time()
     print('Filter %d processed in %ds' % (filter_index, end_time - start_time))
 
